@@ -37,22 +37,17 @@ export function Page({ restoreKey, title, back, right, section, noTabs, children
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    const lt = el.querySelector<HTMLElement>('.large-title')
+    const nav = el.querySelector<HTMLElement>('.navbar')
     const onScroll = () => {
       setScrolled(el.scrollTop > 4)
+      // o título pequeno aparece quando o título grande passa por baixo da barra
+      if (lt) setShowTitle(el.scrollTop + (nav?.offsetHeight ?? 64) > lt.offsetTop + lt.offsetHeight - 8)
       if (restoreKey) saved.set(restoreKey, el.scrollTop)
     }
     onScroll()
     el.addEventListener('scroll', onScroll, { passive: true })
-    const lt = el.querySelector('.large-title')
-    let io: IntersectionObserver | undefined
-    if (lt && 'IntersectionObserver' in window) {
-      io = new IntersectionObserver(([e]) => setShowTitle(!e.isIntersecting), { root: el, rootMargin: '-90px 0px 0px 0px' })
-      io.observe(lt)
-    }
-    return () => {
-      el.removeEventListener('scroll', onScroll)
-      io?.disconnect()
-    }
+    return () => el.removeEventListener('scroll', onScroll)
   }, [restoreKey, title])
 
   return (

@@ -33,8 +33,14 @@ b, strong { font-weight: 650; }
 
 .backdrop { background: var(--bg); }
 
+/* Círculos e emblemas com uma letra, número ou ícone: centrar pela caixa da letra, não pela linha de texto */
+.opt .ol, .ring > span, .ideas li > i, .chain li > i, .dg-flow .cell > i, .mcard .mi, .cont .ic, .tile svg, .hint svg, .chip, .chipbtn, .btn, .back, .search button { line-height: 1; }
+.ring > span, .ideas li > i, .chain li > i, .dg-flow .cell > i { font-variant-numeric: tabular-nums; }
+/* Centra pela altura real das maiúsculas/algarismos (Safari 18.2+, Chrome 133+); noutros fica quase igual */
+.opt .ol, .ring > span, .ideas li > i, .chain li > i, .dg-flow .cell > i { text-box: trim-both cap alphabetic; }
+
 /* ---------- página ---------- */
-.page { height: 100%; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.page { position: relative; height: 100%; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-right, 0px)) var(--tabspace) max(16px, env(safe-area-inset-left, 0px)); }
 .page.no-tabs .wrap { padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)); }
 
@@ -243,7 +249,7 @@ b, strong { font-weight: 650; }
 .opts { display: grid; gap: 8px; margin-top: 14px; }
 .opt { display: flex; align-items: flex-start; gap: 12px; width: 100%; text-align: left; padding: 12px; border-radius: var(--r-s); background: var(--fill); border: 0; cursor: pointer; font-size: 16px; line-height: 1.38; transition: background .15s, opacity .2s; }
 .opt:active { transform: scale(.99); }
-.opt .ol { width: 26px; height: 26px; border-radius: 50%; background: var(--card); display: grid; place-items: center; flex: none; font-size: 14px; font-weight: 700; color: var(--mut); margin-top: -1px; }
+.opt .ol { width: 26px; height: 26px; border-radius: 50%; background: var(--card); display: grid; place-items: center; flex: none; font-size: 14px; font-weight: 700; color: var(--mut); margin-top: -2px; }
 .opt .ot { flex: 1; min-width: 0; }
 .opt .why { display: block; font-size: 14.5px; margin-top: 5px; color: var(--mut); font-weight: 400; animation: in .22s ease-out; }
 .answered .opt { cursor: default; }

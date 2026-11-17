@@ -1,0 +1,297 @@
+import type { Aula } from '../types'
+
+export const aula05: Aula = {
+  n: 5,
+  bloco: 'origens',
+  titulo: 'A Gestão num Mundo em Mudança',
+  pergunta: 'O que podem realmente os gestores controlar?',
+  fio: 'Globalização → Tecnologia → Incerteza → Adaptação',
+  data: '6 out',
+  resumo: [
+    {
+      p: 'Uma empresa de sucesso em 2010 que em 2026 mantém o mesmo produto, processos, estrutura, competências e estratégia continua a ser boa? **Ser eficiente hoje não garante ser competitivo amanhã.** O ambiente não pede autorização: taxas de juro, concorrentes, preferências, regulação, demografia, IA, geopolítica, câmbios.',
+    },
+    {
+      h: 'O que controla o gestor?',
+      bullets: [
+        '**Não controla**: economia, tecnologia externa, concorrentes, regulação, geopolítica, mudanças sociais.',
+        '**Pode influenciar / decidir**: estratégia, recursos, estrutura, processos, pessoas, investimento, resposta ao ambiente.',
+        '**Gerir não é controlar o ambiente. É decidir como responder-lhe.**',
+      ],
+    },
+    {
+      h: 'Globalização',
+      bullets: [
+        'Crescente integração e interdependência entre mercados, empresas, pessoas, capital, tecnologia e informação. Uma decisão num país pode afetar organizações a milhares de quilómetros.',
+        'Uma empresa portuguesa usa software americano, equipamentos chineses, cloud global, financiamento europeu e enfrenta um concorrente espanhol: onde termina o ambiente da empresa?',
+        '**Oportunidades**: novos mercados, escala, talento, tecnologia, fornecedores, capital. **Riscos**: mais concorrência, dependências, choques externos, complexidade, regulação múltipla, risco geopolítico.',
+        'Choque externo → componente indisponível → produção ↓ → entregas ↓ → vendas ↓. **Interdependência cria oportunidades e vulnerabilidades.**',
+      ],
+    },
+    {
+      h: 'Tecnologia: ferramenta ou ambiente?',
+      bullets: [
+        '**Recurso interno** (software, automação, dados, IA, processos digitais) e **força externa** (novos concorrentes, novos modelos de negócio, novas expectativas, substituição de produtos).',
+        'Netflix (streaming), Amazon (comércio digital + logística + dados), Uber (plataforma + smartphone + localização): a tecnologia pode **alterar modelos de negócio inteiros**.',
+        'IA: antes, humano → decisão → ação; agora, dados → algoritmo → recomendação → humano → decisão (e, em alguns processos, algoritmo → decisão/ação).',
+        'Mais informação = menos incerteza? **Não necessariamente**: prevemos melhor algumas coisas num mundo mais complexo.',
+      ],
+    },
+    {
+      h: 'VUCA',
+      bullets: [
+        '**Volatility** (mudança rápida), **Uncertainty** (dificuldade em prever), **Complexity** (múltiplas variáveis interdependentes), **Ambiguity** (dificuldade em interpretar situações novas).',
+        'VUCA não significa «caos»: **incerteza não elimina a gestão, torna-a mais necessária**. Monitorizar, experimentar, aprender, criar cenários, adaptar, resiliência. Não deixamos de planear: planeamos de forma diferente.',
+      ],
+    },
+    {
+      h: 'Eficiência vs adaptação',
+      bullets: [
+        'Eficiência: padronização, escala, especialização, utilização máxima. Adaptação: flexibilidade, experimentação, redundância, velocidade.',
+        '**Paradoxo da eficiência**: fornecedor único, stock mínimo, utilização máxima, zero redundância → custos ↓, mas perante um choque o sistema para. Eliminar toda a redundância pode reduzir a resiliência.',
+        'Adaptar não é reagir a tudo: é relevante? Temporário ou estrutural? Qual o impacto? Devemos responder? Quando? **Distinguir sinal de ruído também é gestão.**',
+      ],
+    },
+    {
+      h: 'Cultura e equipas multiculturais',
+      bullets: [
+        'A cultura influencia expectativas sobre comunicação, autoridade, decisão, colaboração, feedback, tempo, conflito e risco.',
+        '**Diferenças culturais são tendências, não etiquetas individuais**: compreender padrões ajuda; estereotipar pessoas não.',
+        '«I think you may want to reconsider this proposal»: para uma pessoa é uma sugestão; para outra, «o chefe quer que eu altere isto».',
+        'Gerir equipas multiculturais: comunicar, clarificar, coordenar, integrar. A diversidade aumenta informação e perspetivas, mas também as necessidades de coordenação.',
+      ],
+    },
+    {
+      p: 'Os dados ajudam a detetar mudanças, prever cenários, identificar padrões, medir respostas e monitorizar riscos, mas **descrevem o ambiente, não escolhem automaticamente a resposta**. Gerir torna-se um processo contínuo de adaptação.',
+    },
+  ],
+  conceitos: [
+    { id: 'controla', termo: 'Controla vs influencia', def: 'O gestor não controla a economia, a tecnologia externa, os concorrentes, a regulação ou a geopolítica; pode decidir estratégia, recursos, estrutura, processos, pessoas, investimento e a resposta ao ambiente.' },
+    { id: 'globalizacao', termo: 'Globalização', def: 'Crescente integração e interdependência entre mercados, empresas, pessoas, capital, tecnologia e informação.' },
+    { id: 'tec-recurso-ambiente', termo: 'Tecnologia como recurso vs como ambiente', def: 'Recurso interno que a empresa usa (software, automação, dados, IA) e força externa a que tem de se adaptar (novos concorrentes, modelos de negócio, expectativas, substitutos).' },
+    { id: 'vuca', termo: 'VUCA', def: 'Volatility, Uncertainty, Complexity, Ambiguity: quatro problemas diferentes de um ambiente em mudança.', modelo: 'vuca' },
+    { id: 'paradoxo-eficiencia', termo: 'Paradoxo da eficiência', def: 'Eliminar toda a redundância (fornecedor único, stock mínimo, utilização máxima) aumenta a eficiência mas pode reduzir a resiliência perante um choque.' },
+    { id: 'eficiencia-adaptacao', termo: 'Eficiência vs adaptação', def: 'Eficiência: padronização, escala, especialização, utilização máxima. Adaptação: flexibilidade, experimentação, redundância, velocidade.' },
+    { id: 'sinal-ruido', termo: 'Sinal vs ruído', def: 'Adaptar não é reagir a tudo: avaliar se a mudança é relevante, temporária ou estrutural, qual o impacto e quando responder.' },
+    { id: 'cultura', termo: 'Diferenças culturais', def: 'Tendências que influenciam expectativas (comunicação, autoridade, decisão, feedback, tempo, conflito, risco); não são etiquetas individuais.' },
+  ],
+  ideias: [
+    'As organizações são sistemas abertos e dependem do ambiente.',
+    'A globalização aumenta simultaneamente oportunidades e interdependências.',
+    'A tecnologia pode melhorar processos e alterar as próprias regras do negócio.',
+    'Incerteza e complexidade não eliminam a necessidade de gestão – aumentam-na.',
+    'O gestor não controla o ambiente; pode orientar a forma como a organização o interpreta e lhe responde.',
+  ],
+  cuidados: [
+    { a: 'Uncertainty', b: 'Ambiguity', explicacao: 'Incerteza: dificuldade em prever (ex.: não sabemos se uma tecnologia será adotada). Ambiguidade: dificuldade em interpretar uma situação nova (ex.: ninguém sabe como uma tecnologia vai criar valor).' },
+    { a: 'Volatility', b: 'Complexity', explicacao: 'Volatilidade é mudança rápida (preço que oscila 30% em semanas). Complexidade são muitas variáveis interdependentes (fornecedores, câmbios, energia e regulação em 12 países).' },
+    { a: 'Mais informação', b: 'Menos incerteza', explicacao: 'Mais dados e melhores modelos não significam necessariamente menos incerteza: o mundo pode ficar mais complexo ao mesmo tempo.' },
+    { a: 'Não controlar o ambiente', b: 'Não poder fazer nada', explicacao: 'Gerir não é controlar o ambiente, é decidir como responder-lhe.' },
+    { a: 'Diferenças culturais', b: 'Estereótipos', explicacao: 'São tendências de grupo, não etiquetas individuais: compreender padrões ajuda a gerir; estereotipar pessoas não.' },
+  ],
+  caso: {
+    nome: 'Moda24',
+    contexto: 'Empresa portuguesa de vestuário com 80 lojas, produção maioritariamente asiática e 25% das vendas online. Equipas em Portugal, Espanha e Ásia.',
+    pergunta: 'Que mudanças externas são mais relevantes? Quais controla a empresa e quais não? Que riscos e oportunidades criam? O que deveria a gestão fazer?',
+    dados: ['80 lojas', 'Produção asiática', 'Vendas online 25%', 'Concorrência de plataformas digitais', 'Custos logísticos ↑', 'IA na previsão da procura', 'Clientes querem entregas mais rápidas', 'Equipas PT, ES e Ásia'],
+    cadeia: [
+      { etapa: 'Não controla', texto: 'Custos logísticos, concorrência de plataformas digitais, expectativas de entrega rápida dos clientes.' },
+      { etapa: 'Pode decidir', texto: 'Rede de fornecedores, stocks, uso de IA na previsão, canais, organização das equipas multiculturais.' },
+      { etapa: 'Causa → efeito', texto: 'Produção asiática + custos logísticos ↑ → abastecimento mais caro e lento → pressão sobre margem e prazos de entrega.' },
+      { etapa: 'Resposta', texto: 'Usar a IA para prever melhor a procura, rever a dependência de fornecedores distantes (paradoxo da eficiência) e coordenar as equipas de vários países.' },
+    ],
+    nota: 'Os slides pedem relações de causa e efeito, não uma lista de tendências. A resposta acima é um exemplo de raciocínio.',
+  },
+  flashcards: [
+    { id: 'a5f1', tipo: 'termo', frente: 'Globalização', verso: 'Crescente integração e interdependência entre mercados, empresas, pessoas, capital, tecnologia e informação.' },
+    { id: 'a5f2', tipo: 'termo', frente: 'VUCA', verso: 'Volatility (mudança rápida), Uncertainty (dificuldade em prever), Complexity (variáveis interdependentes), Ambiguity (dificuldade em interpretar situações novas).' },
+    { id: 'a5f3', tipo: 'termo', frente: 'Paradoxo da eficiência', verso: 'Fornecedor único, stock mínimo, utilização máxima e zero redundância baixam custos, mas perante um choque o sistema para: mais eficiência, menos resiliência.' },
+    { id: 'a5f4', tipo: 'explica', frente: 'Explica numa frase o que o gestor pode realmente controlar.', verso: 'Não controla o ambiente (economia, concorrentes, regulação, geopolítica), mas decide como a organização o interpreta e lhe responde: estratégia, recursos, estrutura, processos, pessoas.' },
+    { id: 'a5f5', tipo: 'exemplo', frente: 'Dá um exemplo de tecnologia que alterou um modelo de negócio inteiro.', verso: 'Netflix (streaming), Amazon (comércio digital + logística + dados) ou Uber (plataforma + smartphone + localização).' },
+    { id: 'a5f6', tipo: 'exemplo', frente: 'Dá um exemplo de cada letra de VUCA.', verso: 'V: matéria-prima oscila 30% em semanas. U: não sabemos se uma tecnologia será adotada. C: produção depende de fornecedores, câmbios, energia e regulação em 12 países. A: tecnologia nova sem se saber como criará valor.' },
+    { id: 'a5f7', tipo: 'explica', frente: 'Globalização: duas faces?', verso: 'Oportunidades (novos mercados, escala, talento, tecnologia, fornecedores, capital) e riscos (mais concorrência, dependências, choques externos, complexidade, regulação múltipla, risco geopolítico).' },
+    { id: 'a5f8', tipo: 'explica', frente: 'VUCA significa caos e que deixamos de planear?', verso: 'Não: a incerteza torna a gestão mais necessária. Planeamos de forma diferente: monitorizar, experimentar, aprender, criar cenários, adaptar, resiliência.' },
+    { id: 'a5f9', tipo: 'explica', frente: 'Que perguntas fazer antes de reagir a uma mudança?', verso: 'É relevante? Temporária ou estrutural? Qual o impacto? Devemos responder? Quando? Distinguir sinal de ruído também é gestão.' },
+    { id: 'a5f10', tipo: 'exemplo', frente: 'Dá um exemplo de mal-entendido cultural.', verso: '«I think you may want to reconsider this proposal»: uma pessoa lê uma sugestão, outra lê «o chefe quer que eu altere isto».' },
+    { id: 'a5f11', tipo: 'explica', frente: 'Tecnologia: recurso ou ambiente?', verso: 'As duas: recurso interno que a empresa usa (software, automação, dados, IA) e força externa a que tem de se adaptar (novos concorrentes, modelos de negócio, substituição de produtos).' },
+    { id: 'a5f12', tipo: 'explica', frente: 'Como mudou o papel da IA na decisão?', verso: 'Antes: humano → decisão → ação. Agora: dados → algoritmo → recomendação → humano → decisão; e em alguns processos o algoritmo decide e age.' },
+  ],
+  quiz: [
+    {
+      id: 'a5q1', tipo: 'conceito',
+      pergunta: 'Qual destes fatores o gestor PODE decidir diretamente?',
+      opcoes: [
+        { t: 'As taxas de juro', porque: 'Errado: é uma variável do ambiente que o gestor não controla.' },
+        { t: 'A estrutura da organização', porque: 'Certo: estratégia, recursos, estrutura, processos, pessoas e investimento estão do lado do que pode decidir.' },
+        { t: 'A regulação', porque: 'Errado: não é controlada pelo gestor.' },
+        { t: 'A geopolítica', porque: 'Errado: não é controlada pelo gestor.' },
+      ],
+      certa: 1,
+    },
+    {
+      id: 'a5q2', tipo: 'conceito',
+      pergunta: 'Que frase resume a resposta da Aula 5 à pergunta «o que pode o gestor controlar?»',
+      opcoes: [
+        { t: 'Gerir é controlar o ambiente', porque: 'Errado: o gestor não controla o ambiente.' },
+        { t: 'Gerir não é controlar o ambiente; é decidir como responder-lhe', porque: 'Certo.' },
+        { t: 'O gestor não pode fazer nada perante o ambiente', porque: 'Errado: pode escolher a resposta da organização.' },
+        { t: 'O ambiente só afeta empresas mal geridas', porque: 'Errado: afeta todas as empresas.' },
+      ],
+      certa: 1,
+    },
+    {
+      id: 'a5q3', tipo: 'cenario',
+      pergunta: 'O preço de uma matéria-prima oscila 30% em poucas semanas. Que dimensão VUCA é esta?',
+      opcoes: [
+        { t: 'Volatility', porque: 'Certo: mudança rápida.' },
+        { t: 'Uncertainty', porque: 'Errado: incerteza é a dificuldade em prever se algo vai acontecer.' },
+        { t: 'Complexity', porque: 'Errado: complexidade são muitas variáveis interdependentes.' },
+        { t: 'Ambiguity', porque: 'Errado: ambiguidade é a dificuldade em interpretar uma situação nova.' },
+      ],
+      certa: 0,
+    },
+    {
+      id: 'a5q4', tipo: 'cenario',
+      pergunta: 'Surge uma tecnologia nova e ninguém sabe ainda como irá criar valor. Que dimensão VUCA é esta?',
+      opcoes: [
+        { t: 'Volatility', porque: 'Errado: não é uma questão de velocidade de mudança.' },
+        { t: 'Uncertainty', porque: 'Errado: é parecido, mas aqui o problema é interpretar o que a tecnologia significa, não prever um resultado.' },
+        { t: 'Complexity', porque: 'Errado: não se trata de muitas variáveis interligadas.' },
+        { t: 'Ambiguity', porque: 'Certo: dificuldade em interpretar situações novas. É o exemplo dos slides.' },
+      ],
+      certa: 3,
+    },
+    {
+      id: 'a5q5', tipo: 'cenario',
+      pergunta: 'A produção depende de fornecedores, câmbios, energia e regulação em 12 países. Que dimensão VUCA é esta?',
+      opcoes: [
+        { t: 'Volatility', porque: 'Errado: o foco não é a rapidez da mudança.' },
+        { t: 'Uncertainty', porque: 'Errado: o foco não é a dificuldade em prever um acontecimento.' },
+        { t: 'Complexity', porque: 'Certo: múltiplas variáveis interdependentes.' },
+        { t: 'Ambiguity', porque: 'Errado: não é uma situação nova difícil de interpretar.' },
+      ],
+      certa: 2,
+    },
+    {
+      id: 'a5q6', tipo: 'cenario',
+      pergunta: 'Não sabemos se uma nova tecnologia será adotada pelo mercado. Que dimensão VUCA é esta?',
+      opcoes: [
+        { t: 'Uncertainty', porque: 'Certo: dificuldade em prever. É o exemplo dos slides.' },
+        { t: 'Ambiguity', porque: 'Errado: na ambiguidade nem sabemos interpretar a situação; aqui sabemos o que está em causa, só não sabemos o desfecho.' },
+        { t: 'Volatility', porque: 'Errado: não se trata de oscilações rápidas.' },
+        { t: 'Complexity', porque: 'Errado: não se trata de muitas variáveis interdependentes.' },
+      ],
+      certa: 0,
+    },
+    {
+      id: 'a5q7', tipo: 'conceito',
+      pergunta: 'Qual é a mensagem dos slides sobre VUCA?',
+      opcoes: [
+        { t: 'VUCA significa caos: planear deixa de fazer sentido', porque: 'Errado: «Se não conseguimos prever perfeitamente, deixamos de planear? Não.»' },
+        { t: 'Incerteza não elimina a gestão; torna-a mais necessária', porque: 'Certo: monitorizar, experimentar, aprender, criar cenários, adaptar.' },
+        { t: 'Com mais dados, o VUCA desaparece', porque: 'Errado: mais informação não significa necessariamente menos incerteza.' },
+        { t: 'VUCA só afeta empresas tecnológicas', porque: 'Errado: afeta organizações em geral.' },
+      ],
+      certa: 1,
+    },
+    {
+      id: 'a5q8', tipo: 'cenario',
+      pergunta: 'Uma empresa tem fornecedor único, stock mínimo e zero redundância. Surge um choque e a produção para. Que conceito ilustra?',
+      opcoes: [
+        { t: 'Paradoxo da eficiência', porque: 'Certo: eliminar toda a redundância aumenta eficiência e reduz resiliência.' },
+        { t: 'Paradoxo da especialização', porque: 'Errado: esse é sobre interdependência entre especialistas (Aula 2).' },
+        { t: 'Efeito Hawthorne', porque: 'Errado: não tem relação.' },
+        { t: 'Teoria da contingência', porque: 'Errado: o conceito específico é o paradoxo da eficiência.' },
+      ],
+      certa: 0,
+    },
+    {
+      id: 'a5q9', tipo: 'conceito',
+      pergunta: 'Qual destes é um RISCO da globalização segundo os slides?',
+      opcoes: [
+        { t: 'Acesso a novos mercados', porque: 'Errado: é uma oportunidade.' },
+        { t: 'Acesso a talento', porque: 'Errado: é uma oportunidade.' },
+        { t: 'Dependências e choques externos', porque: 'Certo: mais concorrência, dependências, choques externos, complexidade, regulação múltipla, risco geopolítico.' },
+        { t: 'Escala', porque: 'Errado: é uma oportunidade.' },
+      ],
+      certa: 2,
+    },
+    {
+      id: 'a5q10', tipo: 'conceito',
+      pergunta: 'A tecnologia, segundo a Aula 5, é…',
+      opcoes: [
+        { t: 'Só uma ferramenta interna', porque: 'Errado: também é uma força externa.' },
+        { t: 'Só uma força externa', porque: 'Errado: também é um recurso que a empresa usa.' },
+        { t: 'Simultaneamente recurso interno e força externa que pode alterar modelos de negócio', porque: 'Certo.' },
+        { t: 'Irrelevante para a gestão', porque: 'Errado: pode alterar as próprias regras do negócio (3.ª ideia da aula).' },
+      ],
+      certa: 2,
+    },
+    {
+      id: 'a5q11', tipo: 'conceito',
+      pergunta: '«Mais informação = menos incerteza?» A resposta dos slides é…',
+      opcoes: [
+        { t: 'Sim, sempre', porque: 'Errado: mais dados e melhores modelos não eliminam a complexidade do mundo.' },
+        { t: 'Não necessariamente: podemos prever melhor algumas coisas e enfrentar um mundo mais complexo', porque: 'Certo.' },
+        { t: 'Não, a informação aumenta sempre a incerteza', porque: 'Errado: não é o que dizem os slides.' },
+        { t: 'Sim, desde que se use IA', porque: 'Errado: a IA pode melhorar previsões, mas não elimina a incerteza.' },
+      ],
+      certa: 1,
+    },
+    {
+      id: 'a5q12', tipo: 'conceito',
+      pergunta: 'Qual destas características pertence à lógica da ADAPTAÇÃO (e não da eficiência)?',
+      opcoes: [
+        { t: 'Utilização máxima', porque: 'Errado: é eficiência.' },
+        { t: 'Padronização', porque: 'Errado: é eficiência.' },
+        { t: 'Redundância', porque: 'Certo: adaptação = flexibilidade, experimentação, redundância, velocidade.' },
+        { t: 'Escala', porque: 'Errado: é eficiência.' },
+      ],
+      certa: 2,
+    },
+    {
+      id: 'a5q13', tipo: 'conceito',
+      pergunta: 'Segundo os slides, as diferenças culturais devem ser vistas como…',
+      opcoes: [
+        { t: 'Etiquetas que descrevem cada pessoa', porque: 'Errado: estereotipar pessoas não ajuda.' },
+        { t: 'Tendências, não etiquetas individuais', porque: 'Certo.' },
+        { t: 'Algo irrelevante numa empresa global', porque: 'Errado: a cultura influencia expectativas sobre comunicação, autoridade, decisão…' },
+        { t: 'Um problema a eliminar', porque: 'Errado: gerir diversidade não é eliminar diferenças.' },
+      ],
+      certa: 1,
+    },
+    {
+      id: 'a5q14', tipo: 'conceito',
+      pergunta: 'Qual é o efeito da diversidade nas equipas, segundo os slides?',
+      opcoes: [
+        { t: 'Reduz a informação e as perspetivas', porque: 'Errado: aumenta-as.' },
+        { t: 'Aumenta informação e perspetivas, mas também as necessidades de coordenação', porque: 'Certo.' },
+        { t: 'Elimina conflitos', porque: 'Errado: não é o que dizem os slides.' },
+        { t: 'Dispensa a coordenação', porque: 'Errado: aumenta a necessidade de coordenação.' },
+      ],
+      certa: 1,
+    },
+    {
+      id: 'a5q15', tipo: 'cenario',
+      pergunta: 'Um choque externo deixa um componente indisponível. Qual é a cadeia de efeitos mostrada nos slides?',
+      opcoes: [
+        { t: 'Produção ↓ → entregas ↓ → vendas ↓', porque: 'Certo: interdependência cria oportunidades e vulnerabilidades.' },
+        { t: 'Vendas ↑ → entregas ↑ → produção ↑', porque: 'Errado: é o sentido oposto.' },
+        { t: 'Não há efeito numa empresa portuguesa', porque: 'Errado: uma decisão a milhares de quilómetros pode afetá-la.' },
+        { t: 'Preços ↓ → procura ↑', porque: 'Errado: não é a cadeia do slide.' },
+      ],
+      certa: 0,
+    },
+    {
+      id: 'a5q16', tipo: 'conceito',
+      pergunta: 'Os dados, perante um ambiente em mudança…',
+      opcoes: [
+        { t: 'Escolhem automaticamente a resposta estratégica', porque: 'Errado: descrevem o ambiente, não escolhem a resposta.' },
+        { t: 'Descrevem o ambiente, mas não escolhem automaticamente a resposta estratégica', porque: 'Certo.' },
+        { t: 'São inúteis em VUCA', porque: 'Errado: ajudam a detetar mudanças, prever cenários, monitorizar riscos.' },
+        { t: 'Eliminam o risco', porque: 'Errado: ajudam a monitorizá-lo.' },
+      ],
+      certa: 1,
+    },
+  ],
+}

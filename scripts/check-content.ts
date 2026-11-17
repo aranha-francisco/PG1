@@ -18,6 +18,7 @@ for (const a of AULAS) {
     if (q.certa < 0 || q.certa >= q.opcoes.length) err(`${q.id}: índice da certa fora das opções`)
     q.opcoes.forEach((o, i) => {
       if (!o.t.trim() || !o.porque.trim()) err(`${q.id}: opção ${i} sem texto ou sem explicação`)
+      if (i !== q.certa && o.porque.trim().length < 14) err(`${q.id}: opção ${i} com explicação demasiado curta ("${o.porque}")`)
       const saysRight = /^certo\b/i.test(o.porque.trim())
       if (i === q.certa && !saysRight) err(`${q.id}: a explicação da opção certa deve começar por "Certo"`)
       if (i !== q.certa && saysRight) err(`${q.id}: opção errada ${i} com explicação "Certo"`)

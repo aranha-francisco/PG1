@@ -6,7 +6,7 @@ import { actions } from '../lib/progress'
 import { go } from '../lib/router'
 import { shuffle } from '../lib/text'
 
-const L = 'abcdefgh'
+const L = 'ABCDEFGH'
 const TIPO = { conceito: 'Conceito', cenario: 'Cenário', calculo: 'Cálculo' } as const
 
 interface Q extends QuizItem {
@@ -74,7 +74,7 @@ export function Quiz({ aulasParam, nParam, runKey }: { aulasParam: string | null
     const onKey = (e: KeyboardEvent) => {
       if (done || !q) return
       const k = e.key.toLowerCase()
-      const pos = '1234'.indexOf(k) >= 0 ? '1234'.indexOf(k) : 'abcd'.indexOf(k)
+      const pos = '1234'.indexOf(k) >= 0 ? '1234'.indexOf(k) : 'abcd'.indexOf(k) /* k já está em minúsculas */
       if (!answered && pos >= 0 && pos < q.order.length) choose(q.order[pos])
       else if (answered && (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight')) { e.preventDefault(); nextQ() }
     }

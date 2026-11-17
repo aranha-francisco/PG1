@@ -3,6 +3,8 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  // O conteúdo das 14 aulas vai no bundle (≈170 kB gzip) e fica em cache offline.
+  build: { chunkSizeWarningLimit: 800 },
   plugins: [
     react(),
     VitePWA({
