@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.wrangler/
+.DS_Store
+*.local
+# Slides da UC: ficam só localmente (material do docente)
+source/*.pdf

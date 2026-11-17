@@ -1,0 +1,32 @@
+{
+  "name": "pg-gestao",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Site de estudo de Princípios de Gestão (LCDG)",
+  "scripts": {
+    "dev": "vite",
+    "check": "tsx scripts/check-content.ts",
+    "build": "tsx scripts/check-content.ts && tsc -p tsconfig.json && vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "dependencies": {
+    "aranha-pwa-kit": "github:aranha-francisco/aranha-pwa-kit#v1.0.0",
+    "lucide-react": "^1.74.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "workbox-window": "^7.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vite-plugin-pwa": "^2.0.0",
+    "wrangler": "^4.164.0"
+  }
+}

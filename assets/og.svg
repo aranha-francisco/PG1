@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f2f2f7"/>
+  <rect x="90" y="150" width="200" height="200" rx="46" fill="#5146d9"/>
+  <rect x="133" y="193" width="52" height="52" rx="13" fill="#fff"/>
+  <rect x="195" y="193" width="52" height="52" rx="13" fill="#b1acee"/>
+  <rect x="133" y="255" width="52" height="52" rx="13" fill="#b1acee"/>
+  <rect x="195" y="255" width="52" height="52" rx="13" fill="#ffc94d"/>
+  <text x="90" y="455" font-family="Helvetica, Arial, sans-serif" font-size="78" font-weight="800" fill="#111114">Princípios de Gestão</text>
+  <text x="90" y="520" font-family="Helvetica, Arial, sans-serif" font-size="34" fill="#6c6c74">Aulas 1 a 14 · resumos, modelos, flashcards e quiz</text>
+  <text x="330" y="235" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#5146d9">LCDG · 1.º ANO</text>
+  <text x="330" y="285" font-family="Helvetica, Arial, sans-serif" font-size="34" fill="#111114">Para estudar no telemóvel,</text>
+  <text x="330" y="328" font-family="Helvetica, Arial, sans-serif" font-size="34" fill="#111114">mesmo sem rede.</text>
+</svg>
