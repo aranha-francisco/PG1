@@ -1,32 +1,54 @@
 // Verifica o conteúdo antes de cada build. Uso: npm run check
-import { ALL_CARDS, ALL_QUIZ, AULAS, AUTORES, MODELOS } from '../src/content/index.ts'
+import { ABERTAS, AULAS, CARTOES, CHAVE_PROFESSOR, EXTRA, PROFESSOR, TEMAS, type QuizItem } from '../src/content/index.ts'
 
 const errors: string[] = []
-const warn: string[] = []
 const err = (m: string) => errors.push(m)
+const N_AULAS = 14
 
-// --- estrutura de cada aula ---
-for (const a of AULAS) {
-  const at = `Aula ${a.n}`
-  if (a.ideias.length !== 5) err(`${at}: tem ${a.ideias.length} ideias (devem ser 5)`)
-  if (a.quiz.length < 15) err(`${at}: só ${a.quiz.length} perguntas (mínimo 15)`)
-  if (a.flashcards.length < 8) err(`${at}: só ${a.flashcards.length} flashcards (mínimo 8)`)
-  if (!a.cuidados.length) err(`${at}: sem "Cuidado com…"`)
-  if (a.caso.cadeia.length < 2) err(`${at}: mini-caso sem cadeia de raciocínio`)
-  for (const q of a.quiz) {
-    if (q.opcoes.length < 3 || q.opcoes.length > 5) err(`${q.id}: ${q.opcoes.length} opções`)
-    if (q.certa < 0 || q.certa >= q.opcoes.length) err(`${q.id}: índice da certa fora das opções`)
-    q.opcoes.forEach((o, i) => {
-      if (!o.t.trim() || !o.porque.trim()) err(`${q.id}: opção ${i} sem texto ou sem explicação`)
-      if (i !== q.certa && o.porque.trim().length < 14) err(`${q.id}: opção ${i} com explicação demasiado curta ("${o.porque}")`)
-      const saysRight = /^certo\b/i.test(o.porque.trim())
-      if (i === q.certa && !saysRight) err(`${q.id}: a explicação da opção certa deve começar por "Certo"`)
-      if (i !== q.certa && saysRight) err(`${q.id}: opção errada ${i} com explicação "Certo"`)
-    })
-    if (new Set(q.opcoes.map((o) => o.t)).size !== q.opcoes.length) err(`${q.id}: opções repetidas`)
-    if (/todas as anteriores|nenhuma das anteriores/i.test(q.opcoes.map((o) => o.t).join(' '))) err(`${q.id}: as opções são baralhadas, não usar "todas/nenhuma das anteriores"`)
+// --- perguntas (professor e extra) ---
+function checkQ(q: QuizItem) {
+  if (q.opcoes.length < 3 || q.opcoes.length > 5) err(`${q.id}: ${q.opcoes.length} opções`)
+  if (q.certa < 0 || q.certa >= q.opcoes.length) err(`${q.id}: índice da certa fora das opções`)
+  q.opcoes.forEach((o, i) => {
+    if (!o.t.trim() || !o.porque.trim()) err(`${q.id}: opção ${i} sem texto ou sem explicação`)
+    const saysRight = /^certo\b/i.test(o.porque.trim())
+    if (i === q.certa && !saysRight) err(`${q.id}: a explicação da opção certa deve começar por "Certo"`)
+    if (i !== q.certa && saysRight) err(`${q.id}: opção errada ${i} com explicação "Certo"`)
+    if (i !== q.certa && o.porque.trim().length < 14) err(`${q.id}: opção ${i} com explicação demasiado curta`)
+  })
+  if (new Set(q.opcoes.map((o) => o.t)).size !== q.opcoes.length) err(`${q.id}: opções repetidas`)
+}
+PROFESSOR.forEach(checkQ)
+EXTRA.forEach(checkQ)
+
+// as 70 do professor: 5 por aula, ids 1.1–14.5, e a certa igual à chave oficial
+if (PROFESSOR.length !== 70) err(`Professor: ${PROFESSOR.length} perguntas (deviam ser 70)`)
+for (let a = 1; a <= N_AULAS; a++) {
+  for (let k = 1; k <= 5; k++) {
+    const q = PROFESSOR.find((x) => x.id === `p${a}.${k}`)
+    if (!q) { err(`Professor: falta a ${a}.${k}`); continue }
+    if (q.opcoes.length !== 4) err(`p${a}.${k}: devia ter 4 opções (A–D)`)
+    if ('ABCD'[q.certa] !== CHAVE_PROFESSOR[a][k - 1]) err(`p${a}.${k}: certa ${'ABCD'[q.certa]} ≠ chave ${CHAVE_PROFESSOR[a][k - 1]}`)
   }
-  for (const c of a.conceitos) if (c.modelo && !MODELOS.some((m) => m.id === c.modelo)) err(`${at}: conceito ${c.id} aponta para modelo inexistente ${c.modelo}`)
+}
+
+// --- abertas: as 25 do documento ---
+const ABERTAS_IDS = ['1.1', '1.2', '2.1', '3.1', '3.2', '4.1', '4.2', '5.1', '5.2', '6.1', '6.2', '7.1', '7.2', '8.1', '8.2', '8.3', '9.1', '10.1', '11.1', '11.2', '12.1', '13.1', '14.1', '14.2']
+for (const id of ABERTAS_IDS) if (!ABERTAS.some((a) => a.id === id)) err(`Abertas: falta a ${id}`)
+for (const a of ABERTAS) {
+  if (a.aula !== Number(a.id.split('.')[0])) err(`Aberta ${a.id}: aula ${a.aula} não bate com o id`)
+  if (!a.blocos.length) err(`Aberta ${a.id}: sem resposta modelo`)
+}
+
+// --- temas: todas as aulas têm pelo menos um tema e uma pergunta ---
+for (let a = 1; a <= N_AULAS; a++) {
+  if (!TEMAS.some((t) => t.aulas.includes(a))) err(`Aula ${a}: sem temas`)
+  if (!AULAS.some((x) => x.n === a)) err(`Aula ${a}: falta no índice`)
+}
+for (const t of TEMAS) {
+  if (!t.essencial.trim()) err(`Tema ${t.id}: sem "essencial"`)
+  if (!t.exemplo.trim() || !t.armadilha.trim()) err(`Tema ${t.id}: falta exemplo ou armadilha`)
+  if (t.aulas.some((a) => a < 1 || a > N_AULAS)) err(`Tema ${t.id}: aula inválida`)
 }
 
 // --- ids únicos (o progresso depende deles) ---
@@ -37,31 +59,25 @@ const dup = (ids: string[], what: string) => {
     seen.add(id)
   }
 }
-dup(ALL_QUIZ.map((q) => q.id), 'Pergunta')
-dup(ALL_CARDS.map((c) => c.id), 'Flashcard')
-dup(MODELOS.map((m) => m.id), 'Modelo')
-dup(AUTORES.map((a) => a.id), 'Autor')
-dup(AULAS.flatMap((a) => a.conceitos.map((c) => c.id)), 'Conceito')
+dup([...PROFESSOR, ...EXTRA].map((q) => q.id), 'Pergunta')
+dup(CARTOES.map((c) => c.id), 'Cartão')
+dup(TEMAS.map((t) => t.id), 'Tema')
+dup(ABERTAS.map((a) => a.id), 'Aberta')
+for (const x of [...EXTRA, ...CARTOES]) if (x.aula < 1 || x.aula > N_AULAS) err(`${x.id}: aula inválida`)
 
-for (const m of MODELOS) if (m.autor && !AUTORES.some((a) => a.id === m.autor)) err(`Modelo ${m.id}: autor inexistente ${m.autor}`)
-for (const a of AUTORES) if (a.modelo && !MODELOS.some((m) => m.id === a.modelo)) err(`Autor ${a.id}: modelo inexistente ${a.modelo}`)
-
-// --- português europeu ---
+// --- português europeu (o texto do professor fica como está) ---
 const BR: [RegExp, string][] = [
   [/\bvoc[êe]s?\b/i, 'você'],
   [/\busu[áa]rios?\b/i, 'usuário → utilizador'],
-  [/\b[ôo]nibus\b/i, 'ônibus → autocarro'],
   [/\bregistros?\b/i, 'registro → registo'],
   [/\bfatos?\b/i, 'fato → facto'],
   [/\bcontatos?\b/i, 'contato → contacto'],
   [/\bequipes?\b/i, 'equipe → equipa'],
-  [/\btelas?\b/i, 'tela → ecrã'],
   [/\bcelulares?\b/i, 'celular → telemóvel'],
   [/\bse[çc][ãa]o\b/i, 'seção → secção'],
   [/\bgerenci/i, 'gerenciar → gerir'],
   [/\bplanej/i, 'planejar → planear'],
-  [/\bsorvetes?\b/i, 'sorvete → gelado'],
-  [/(ômic|ênic|ômeno|ênero|ônimo|êmic|ônom)/i, 'acentuação brasileira (ó/é em pt-PT)'],
+  [/(ômic|ênic|ômeno|ênero|ônimo|êmic|ônom)/i, 'acentuação brasileira'],
   [/\b(estou|est[áa]|estamos|est[ãa]o|estava|estavam|ficou|vai|v[ãa]o)\s+\w+ndo\b/i, 'gerúndio (estar a + infinitivo)'],
   [/\ba gente\b/i, '"a gente"'],
 ]
@@ -69,19 +85,15 @@ function walk(v: unknown, path: string) {
   if (typeof v === 'string') {
     for (const [re, label] of BR) if (re.test(v)) err(`pt-PT em ${path}: ${label} → "${v.slice(0, 90)}"`)
   } else if (Array.isArray(v)) v.forEach((x, i) => walk(x, `${path}[${i}]`))
-  else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) walk(x, `${path}.${k}`)
+  else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) if (k !== 'pergunta' || !path.startsWith('prof')) walk(x, `${path}.${k}`)
 }
-walk(AULAS, 'aulas')
-walk(MODELOS, 'modelos')
-walk(AUTORES, 'autores')
+walk(TEMAS, 'temas')
+walk(ABERTAS.map(({ pergunta: _p, ...r }) => r), 'abertas')
+walk(PROFESSOR.map((q) => q.opcoes.map((o) => o.porque)), 'prof.explicacoes')
+walk(EXTRA, 'extra')
+walk(CARTOES, 'cartoes')
 
-// --- equilíbrio das respostas certas (as opções são baralhadas no ecrã, mas convém variar) ---
-const tipos = { conceito: 0, cenario: 0, calculo: 0 }
-for (const q of ALL_QUIZ) tipos[q.tipo]++
-
-console.log(`Aulas: ${AULAS.length} · Perguntas: ${ALL_QUIZ.length} (conceito ${tipos.conceito}, cenário ${tipos.cenario}, cálculo ${tipos.calculo}) · Flashcards: ${ALL_CARDS.length} · Modelos: ${MODELOS.length} · Autores: ${AUTORES.length}`)
-if (AULAS.length < 14) warn.push(`Só ${AULAS.length} de 14 aulas têm conteúdo`)
-warn.forEach((w) => console.warn('Aviso: ' + w))
+console.log(`Temas: ${TEMAS.length} · Professor: ${PROFESSOR.length} · Abertas: ${ABERTAS.length} · Mais treino: ${EXTRA.length} · Cartões: ${CARTOES.length}`)
 if (errors.length) {
   console.error(`\n${errors.length} erro(s):\n- ` + errors.join('\n- '))
   process.exit(1)

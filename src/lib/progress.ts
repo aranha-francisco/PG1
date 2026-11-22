@@ -3,30 +3,33 @@ import { useSyncExternalStore } from 'react'
 // Progresso guardado só neste dispositivo (localStorage, sempre dentro de try/catch).
 // Atenção: no iPhone, a app instalada tem armazenamento separado do Safari.
 
+/** Autoavaliação de uma resposta aberta: 0 não sei · 1 mais ou menos · 2 sei */
+export type Nivel = 0 | 1 | 2
+
 export interface Progress {
-  v: 1
-  /** aulas marcadas como revistas: n → timestamp */
-  revisto: Record<string, number>
-  /** última resposta a cada pergunta do quiz */
+  v: 2
+  /** temas marcados como "sei este tema" */
+  temas: Record<string, number>
+  /** última resposta a cada pergunta de escolha múltipla (professor: "p7.2"; extra: "a7q4") */
   qa: Record<string, { ok: boolean; t: number }>
-  /** melhor e último resultado de quizzes só de uma aula */
-  quiz: Record<string, { best: number; last: number; total: number; t: number }>
+  /** respostas abertas: última autoavaliação */
+  ab: Record<string, { r: Nivel; t: number }>
   /** flashcards: caixa de Leitner (0 = não sei … 4 = sei bem) */
   fc: Record<string, { box: number; t: number }>
-  /** última página de conteúdo visitada, para "Continuar" */
+  /** última página visitada, para "Continuar" */
   last?: { href: string; label: string; t: number }
   hintDismissed?: boolean
 }
 
-const KEY = 'pg-gestao:v1'
-const EMPTY: Progress = { v: 1, revisto: {}, qa: {}, quiz: {}, fc: {} }
+const KEY = 'pg-gestao:v2'
+const EMPTY: Progress = { v: 2, temas: {}, qa: {}, ab: {}, fc: {} }
 
 function load(): Progress {
   try {
     const raw = localStorage.getItem(KEY)
     if (!raw) return { ...EMPTY }
     const p = JSON.parse(raw) as Partial<Progress>
-    return { ...EMPTY, ...p, revisto: p.revisto || {}, qa: p.qa || {}, quiz: p.quiz || {}, fc: p.fc || {} }
+    return { ...EMPTY, ...p, temas: p.temas || {}, qa: p.qa || {}, ab: p.ab || {}, fc: p.fc || {} }
   } catch {
     return { ...EMPTY }
   }
@@ -64,7 +67,6 @@ export function useProgress(): Progress {
   )
 }
 
-// Outras abas/janelas do mesmo dispositivo
 window.addEventListener('storage', (e) => {
   if (e.key === KEY) {
     state = load()
@@ -72,24 +74,27 @@ window.addEventListener('storage', (e) => {
   }
 })
 
+// A versão anterior (pg-gestao:v1) tinha progresso de conteúdos que já não existem.
+try {
+  localStorage.removeItem('pg-gestao:v1')
+} catch {
+  /* ignorar */
+}
+
 export const actions = {
-  toggleRevisto(n: number) {
+  toggleTema(id: string) {
     update((p) => {
-      const revisto = { ...p.revisto }
-      if (revisto[n]) delete revisto[n]
-      else revisto[n] = Date.now()
-      return { ...p, revisto }
+      const temas = { ...p.temas }
+      if (temas[id]) delete temas[id]
+      else temas[id] = Date.now()
+      return { ...p, temas }
     })
   },
   answer(id: string, ok: boolean) {
     update((p) => ({ ...p, qa: { ...p.qa, [id]: { ok, t: Date.now() } } }))
   },
-  quizDone(aula: number, score: number, total: number) {
-    update((p) => {
-      const prev = p.quiz[aula]
-      const best = prev && prev.total === total ? Math.max(prev.best, score) : score
-      return { ...p, quiz: { ...p.quiz, [aula]: { best, last: score, total, t: Date.now() } } }
-    })
+  rate(id: string, r: Nivel) {
+    update((p) => ({ ...p, ab: { ...p.ab, [id]: { r, t: Date.now() } } }))
   },
   card(id: string, known: boolean) {
     update((p) => {

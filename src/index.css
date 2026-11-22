@@ -339,3 +339,23 @@ mark { background: color-mix(in srgb, var(--a) 22%, transparent); color: inherit
   .fc { transition: none; }
   .opt .why, .qbar i { animation: none; transition: none; }
 }
+
+/* ---------- revamp: temas, abertas, simulado ---------- */
+.essencial { border-left: 0; box-shadow: var(--shadow), inset 4px 0 0 var(--a); }
+.essencial p { margin: 4px 0 0; font-size: 17px; line-height: 1.5; }
+.lab { display: block; font-weight: 700; font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--a); margin-bottom: 2px; }
+.warn .lab { color: var(--orange); }
+.flag { background: var(--blue-t); border-radius: var(--r-s); padding: 12px 14px; font-size: 15.5px; }
+.flag .lab { color: var(--blue); }
+.flag ul { margin: 4px 0 0; padding-left: 18px; }
+.flag li { margin: 4px 0; line-height: 1.42; }
+.answer-model { background: var(--fill); border-radius: var(--r-s); padding: 12px 14px; animation: in .22s ease-out; }
+.answer-model p, .answer-model li { font-size: 16px; }
+.rate3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.rate3 .btn { padding: 12px 6px; font-size: 15px; }
+.btn.mid { background: var(--orange-t); color: var(--orange); }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.stat { color: var(--txt); display: block; }
+.sec-h > span:last-child:not(:first-child) { text-transform: none; color: var(--a); font-weight: 600; }
+details.rv summary { list-style: none; }
+details.rv summary::-webkit-details-marker { display: none; }

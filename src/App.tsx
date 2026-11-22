@@ -1,29 +1,28 @@
 import { LiquidTabBar, type LiquidTab } from 'aranha-pwa-kit'
-import { BookOpen, LayoutGrid, Search, House, Zap } from 'lucide-react'
+import { BookOpen, CircleCheckBig, GalleryVerticalEnd, House, MessageSquareText } from 'lucide-react'
 import { useSyncExternalStore } from 'react'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 import { useRoute, go } from './lib/router'
-import { AulaPage } from './screens/AulaPage'
-import { Aulas } from './screens/Aulas'
+import { AbertaTreino, Abertas } from './screens/Abertas'
+import { Cartoes } from './screens/Cartoes'
+import { Escolha } from './screens/Escolha'
 import { Flashcards } from './screens/Flashcards'
 import { Inicio } from './screens/Inicio'
-import { ModeloPage } from './screens/ModeloPage'
-import { Autores, Modelos } from './screens/Modelos'
 import { NotFound } from './screens/NotFound'
-import { Pesquisa } from './screens/Pesquisa'
-import { Quiz } from './screens/Quiz'
-import { Treinar } from './screens/Treinar'
+import { Quiz, parseQuiz } from './screens/Quiz'
+import { Simulado } from './screens/Simulado'
+import { TemaPage, Temas } from './screens/Temas'
 
-type Tab = 'inicio' | 'aulas' | 'modelos' | 'treinar' | 'pesquisa'
+type Tab = 'inicio' | 'temas' | 'escolha' | 'abertas' | 'cartoes'
 
 const TABS: LiquidTab<Tab>[] = [
   { id: 'inicio', label: 'Início', icon: <House aria-hidden="true" /> },
-  { id: 'aulas', label: 'Aulas', icon: <BookOpen aria-hidden="true" /> },
-  { id: 'modelos', label: 'Modelos', icon: <LayoutGrid aria-hidden="true" /> },
-  { id: 'treinar', label: 'Treinar', icon: <Zap aria-hidden="true" /> },
-  { id: 'pesquisa', label: 'Pesquisa', icon: <Search aria-hidden="true" /> },
+  { id: 'temas', label: 'Temas', icon: <BookOpen aria-hidden="true" /> },
+  { id: 'escolha', label: 'Escolha', icon: <CircleCheckBig aria-hidden="true" /> },
+  { id: 'abertas', label: 'Abertas', icon: <MessageSquareText aria-hidden="true" /> },
+  { id: 'cartoes', label: 'Cartões', icon: <GalleryVerticalEnd aria-hidden="true" /> },
 ]
-const TAB_ROOT: Record<Tab, string> = { inicio: '/', aulas: '/aulas', modelos: '/modelos', treinar: '/treinar', pesquisa: '/pesquisa' }
+const TAB_ROOT: Record<Tab, string> = { inicio: '/', temas: '/temas', escolha: '/escolha', abertas: '/abertas', cartoes: '/cartoes' }
 
 const darkQuery = typeof matchMedia === 'function' ? matchMedia('(prefers-color-scheme: dark)') : null
 function useDark() {
@@ -47,15 +46,15 @@ export function App() {
   let tabsAway = false
   switch (p0) {
     case undefined: screen = <Inicio />; break
-    case 'aulas': tab = 'aulas'; screen = <Aulas />; break
-    case 'aula': tab = 'aulas'; screen = <AulaPage key={p1} n={Number(p1)} section={route.section} />; break
-    case 'modelos': tab = 'modelos'; screen = <Modelos />; break
-    case 'autores': tab = 'modelos'; screen = <Autores section={route.section} />; break
-    case 'modelo': tab = 'modelos'; screen = <ModeloPage key={p1} id={p1 ?? ''} />; break
-    case 'treinar': tab = 'treinar'; screen = <Treinar />; break
-    case 'quiz': tab = 'treinar'; tabsAway = true; screen = <Quiz aulasParam={route.query.get('aulas')} nParam={route.query.get('n')} runKey={route.raw} />; break
-    case 'flashcards': tab = 'treinar'; tabsAway = true; screen = <Flashcards aulasParam={route.query.get('aulas')} tipoParam={route.query.get('tipo')} runKey={route.raw} />; break
-    case 'pesquisa': tab = 'pesquisa'; screen = <Pesquisa />; break
+    case 'temas': tab = 'temas'; screen = <Temas />; break
+    case 'tema': tab = 'temas'; screen = <TemaPage key={p1} id={p1 ?? ''} />; break
+    case 'escolha': tab = 'escolha'; screen = <Escolha />; break
+    case 'quiz': tab = 'escolha'; tabsAway = true; screen = <Quiz params={parseQuiz(route.query)} runKey={route.raw} />; break
+    case 'simulado': tab = 'inicio'; tabsAway = true; screen = <Simulado key={route.raw} />; break
+    case 'abertas': tab = 'abertas'; screen = <Abertas />; break
+    case 'aberta': tab = 'abertas'; tabsAway = true; screen = <AbertaTreino query={route.query} runKey={route.raw} />; break
+    case 'cartoes': tab = 'cartoes'; screen = <Cartoes />; break
+    case 'flashcards': tab = 'cartoes'; tabsAway = true; screen = <Flashcards aulasParam={route.query.get('aulas')} tipoParam={route.query.get('tipo')} runKey={route.raw} />; break
     default: screen = <NotFound />
   }
 

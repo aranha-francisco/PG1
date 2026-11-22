@@ -1,7 +1,7 @@
 import { Check, X } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Page } from '../components/Page'
-import { ALL_CARDS, type CardItem } from '../content'
+import { CARTOES, type CardItem } from '../content'
 import type { FlashTipo } from '../content/types'
 import { actions, getProgress } from '../lib/progress'
 import { go } from '../lib/router'
@@ -13,7 +13,7 @@ const SESSION = 20
 /** Os cartões que não sabes (caixa baixa) e os nunca vistos vêm primeiro. */
 function build(aulas: number[], tipo: string | null): CardItem[] {
   const p = getProgress()
-  const pool = ALL_CARDS.filter((c) => (!aulas.length || aulas.includes(c.aula)) && (!tipo || c.tipo === tipo))
+  const pool = CARTOES.filter((c) => (!aulas.length || aulas.includes(c.aula)) && (!tipo || c.tipo === tipo))
   const weight = (c: CardItem) => {
     const s = p.fc[c.id]
     if (!s) return 1 // nunca visto
@@ -30,7 +30,7 @@ function leave(fallback: string) {
 export function Flashcards({ aulasParam, tipoParam, runKey }: { aulasParam: string | null; tipoParam: string | null; runKey: string }) {
   const aulas = useMemo(() => (aulasParam ? aulasParam.split(',').map(Number).filter(Boolean) : []), [aulasParam])
   const single = aulas.length === 1 ? aulas[0] : null
-  const fallback = single ? `/aula/${single}` : '/treinar'
+  const fallback = '/cartoes'
   const [queue, setQueue] = useState<CardItem[]>(() => build(aulas, tipoParam))
   const [total, setTotal] = useState(queue.length)
   const [flip, setFlip] = useState(false)
@@ -99,7 +99,7 @@ export function Flashcards({ aulasParam, tipoParam, runKey }: { aulasParam: stri
   }
 
   if (!card) {
-    const missed = ALL_CARDS.filter((c) => unknown.includes(c.id))
+    const missed = CARTOES.filter((c) => unknown.includes(c.id))
     return (
       <Page title={title} noTabs right={exit}>
         <h1 className="large-title" style={{ fontSize: 28 }}>{title}</h1>
