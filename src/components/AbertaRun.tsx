@@ -1,6 +1,7 @@
 import { Eye } from 'lucide-react'
 import { useState } from 'react'
 import type { Aberta } from '../content'
+import { CURTAS } from '../content/abertas-curtas'
 import { actions, getProgress, type Nivel } from '../lib/progress'
 import { Rich } from '../lib/text'
 
@@ -14,6 +15,28 @@ export function porNecessidade(list: Aberta[]): Aberta[] {
     return r === undefined ? 1 : r === 0 ? 0 : r === 1 ? 2 : 3
   }
   return [...list].sort((a, b) => w(a) - w(b))
+}
+
+/** Resposta curta (para decorar) e, por baixo, a explicação completa num toque. */
+export function Resposta({ a }: { a: Aberta }) {
+  const curta = CURTAS[a.id]
+  if (!curta) return <RespostaModelo a={a} />
+  return (
+    <>
+      <div className="curta">
+        <span className="lab">Resposta modelo</span>
+        {curta.split('\n').map((l, i) => {
+          // «Termo: explicação» → termo a negrito, para ser mais fácil de decorar
+          const m = l.match(/^([^:.]{2,45}):\s(.*)$/)
+          return <p key={i}>{m ? <><b>{m[1]}:</b> {m[2]}</> : l}</p>
+        })}
+      </div>
+      <details className="mais">
+        <summary>Ver explicação completa</summary>
+        <RespostaModelo a={a} />
+      </details>
+    </>
+  )
 }
 
 export function RespostaModelo({ a }: { a: Aberta }) {
@@ -69,14 +92,14 @@ export function AbertaRun({ list, label, onFinish }: Props) {
         <p className="qtext">{a.pergunta}</p>
         {!shown ? (
           <>
-            <p className="small" style={{ margin: '12px 0 0' }}>Pensa na tua resposta (ou di-la em voz alta): definição, explicação, exemplo. Depois compara.</p>
+            <p className="small" style={{ margin: '12px 0 0' }}>Pensa na tua resposta (ou di-la em voz alta). Depois compara com a resposta modelo.</p>
             <button type="button" className="btn primary block" style={{ marginTop: 14 }} onClick={() => setShown(true)}>
               <Eye aria-hidden="true" /> Ver resposta modelo
             </button>
           </>
         ) : (
           <div style={{ marginTop: 14 }}>
-            <RespostaModelo a={a} />
+            <Resposta a={a} />
           </div>
         )}
       </div>

@@ -359,3 +359,12 @@ mark { background: color-mix(in srgb, var(--a) 22%, transparent); color: inherit
 .sec-h > span:last-child:not(:first-child) { text-transform: none; color: var(--a); font-weight: 600; }
 details.rv summary { list-style: none; }
 details.rv summary::-webkit-details-marker { display: none; }
+.curta { background: var(--a-t); border-radius: var(--r-s); padding: 12px 14px; animation: in .22s ease-out; }
+.curta p { margin: 6px 0 0; font-size: 16.5px; line-height: 1.5; }
+.curta p:first-of-type { margin-top: 2px; }
+details.mais { margin-top: 12px; }
+details.mais > summary { cursor: pointer; color: var(--a); font-weight: 600; font-size: 15px; padding: 6px 2px; list-style: none; }
+details.mais > summary::-webkit-details-marker { display: none; }
+details.mais > summary::after { content: " ▾"; }
+details.mais[open] > summary::after { content: " ▴"; }
+details.mais > .answer-model { margin-top: 6px; }

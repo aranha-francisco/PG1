@@ -1,4 +1,5 @@
 // Verifica o conteúdo antes de cada build. Uso: npm run check
+import { CURTAS } from '../src/content/abertas-curtas.ts'
 import { ABERTAS, AULAS, CARTOES, CHAVE_PROFESSOR, EXTRA, PROFESSOR, TEMAS, type QuizItem } from '../src/content/index.ts'
 
 const errors: string[] = []
@@ -38,6 +39,9 @@ for (const id of ABERTAS_IDS) if (!ABERTAS.some((a) => a.id === id)) err(`Aberta
 for (const a of ABERTAS) {
   if (a.aula !== Number(a.id.split('.')[0])) err(`Aberta ${a.id}: aula ${a.aula} não bate com o id`)
   if (!a.blocos.length) err(`Aberta ${a.id}: sem resposta modelo`)
+  const c = CURTAS[a.id]
+  if (!c) err(`Aberta ${a.id}: sem resposta curta`)
+  else if (c.split(/\s+/).length > 90) err(`Aberta ${a.id}: resposta curta com ${c.split(/\s+/).length} palavras (máx. 90)`)
 }
 
 // --- temas: todas as aulas têm pelo menos um tema e uma pergunta ---
@@ -89,6 +93,7 @@ function walk(v: unknown, path: string) {
 }
 walk(TEMAS, 'temas')
 walk(ABERTAS.map(({ pergunta: _p, ...r }) => r), 'abertas')
+walk(CURTAS, 'curtas')
 walk(PROFESSOR.map((q) => q.opcoes.map((o) => o.porque)), 'prof.explicacoes')
 walk(EXTRA, 'extra')
 walk(CARTOES, 'cartoes')

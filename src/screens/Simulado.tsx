@@ -1,6 +1,6 @@
 import { X } from 'lucide-react'
 import { useState } from 'react'
-import { AbertaRun, RespostaModelo } from '../components/AbertaRun'
+import { AbertaRun, Resposta } from '../components/AbertaRun'
 import { Page } from '../components/Page'
 import { QuizResult, QuizRun, prepare, type RunQ } from '../components/QuizRun'
 import { ABERTAS, PROFESSOR, type Aberta } from '../content'
@@ -66,7 +66,7 @@ export function Simulado() {
               {s.abertas.map((a, k) => rat[k] < 2 && (
                 <details className="rv" key={a.id}>
                   <summary style={{ cursor: 'pointer', fontWeight: 600 }}>{a.id} · {a.pergunta}</summary>
-                  <div style={{ marginTop: 8 }}><RespostaModelo a={a} /></div>
+                  <div style={{ marginTop: 8 }}><Resposta a={a} /></div>
                 </details>
               ))}
             </div>
